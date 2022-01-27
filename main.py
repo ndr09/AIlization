@@ -80,8 +80,11 @@ class Environment():
         y_hex_coords = hex_centers[:, 1]
         ec = [ (1., 1., 1.) for i in range(len(x_hex_coords))]
         fc = [(0., 0., 0.) for i in range(len(x_hex_coords))]
-        ec[6] = (0., 0.5, 0.5)
-        fc[6] = (1., 0., 0.)
+
+        for k in self.grid.reward.keys():
+            p = self.from_xy_to_i(k)
+            ec[p] = (0., 0.5, 0.5)
+            fc[p] = (1., 0., 0.)
         plot_single_lattice_custom_colors(x_hex_coords, y_hex_coords,
                                           face_color=ec,
                                           edge_color=fc,
